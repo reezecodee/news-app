@@ -1,11 +1,107 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { fetchData } from "../utils/fetchUtil";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const news = await fetchData();
 ---
 
 <Layout>
-	<Welcome />
+	<main class="container mx-auto px-4 py-8">
+		<div class="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+			<img
+				src="https://images.unsplash.com/photo-1719937206491-ed673f64be1f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+				alt="Berita Utama"
+				class="w-full h-96 object-cover"
+			/>
+			<div class="p-6">
+				<span class="text-blue-600 font-semibold">Teknologi</span>
+				<h1 class="text-3xl font-bold mt-2 mb-4">
+					Perkembangan Teknologi AI di Indonesia Semakin Pesat
+				</h1>
+				<div class="flex items-center text-gray-600">
+					<span>Ahmad Susanto</span>
+					<span class="mx-2">•</span>
+					<span>20 Des 2024</span>
+				</div>
+			</div>
+		</div>
+		<!-- Grid Berita Terbaru -->
+		<h2 class="text-2xl font-bold mb-4">Berita Terbaru</h2>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+			{
+				news.length > 0 ? (
+					news.map((item) => (
+						<div
+							key={item.id}
+							class="bg-white rounded-lg shadow-md overflow-hidden"
+						>
+							<img
+								src="https://images.unsplash.com/photo-1719937206491-ed673f64be1f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+								alt="Berita 1"
+								class="w-full h-48 object-cover"
+							/>
+							<div class="p-4">
+								<span class="text-blue-600 text-sm">
+									Ekonomi
+								</span>
+								<h3 class="font-semibold mt-2">
+									Pertumbuhan Ekonomi Digital Indonesia
+									Mencapai 20%
+								</h3>
+								<p class="text-gray-600 text-sm mt-2">
+									2 jam yang lalu
+								</p>
+							</div>
+						</div>
+					))
+				) : (
+					<p>Data berita tidak tersedia.</p>
+				)
+			}
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<img
+					src="https://images.unsplash.com/photo-1719937206491-ed673f64be1f?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+					alt="Berita 1"
+					class="w-full h-48 object-cover"
+				/>
+				<div class="p-4">
+					<span class="text-blue-600 text-sm">Ekonomi</span>
+					<h3 class="font-semibold mt-2">
+						Pertumbuhan Ekonomi Digital Indonesia Mencapai 20%
+					</h3>
+					<p class="text-gray-600 text-sm mt-2">2 jam yang lalu</p>
+				</div>
+			</div>
+
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<img
+					src="/api/placeholder/400/200"
+					alt="Berita 2"
+					class="w-full h-48 object-cover"
+				/>
+				<div class="p-4">
+					<span class="text-blue-600 text-sm">Olahraga</span>
+					<h3 class="font-semibold mt-2">
+						Tim Nasional Lolos ke Semifinal Piala Asia
+					</h3>
+					<p class="text-gray-600 text-sm mt-2">3 jam yang lalu</p>
+				</div>
+			</div>
+
+			<div class="bg-white rounded-lg shadow-md overflow-hidden">
+				<img
+					src="/api/placeholder/400/200"
+					alt="Berita 3"
+					class="w-full h-48 object-cover"
+				/>
+				<div class="p-4">
+					<span class="text-blue-600 text-sm">Lifestyle</span>
+					<h3 class="font-semibold mt-2">
+						Festival Kuliner Nusantara Dibuka di Jakarta
+					</h3>
+					<p class="text-gray-600 text-sm mt-2">4 jam yang lalu</p>
+				</div>
+			</div>
+		</div>
+	</main>
 </Layout>
